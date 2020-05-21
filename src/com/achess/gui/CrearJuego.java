@@ -58,5 +58,4 @@ public class CrearJuego extends JPanel {
         this.add(botoncito);
     }
 
-
 }
