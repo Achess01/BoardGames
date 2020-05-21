@@ -2,6 +2,8 @@ package com.achess.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainFrame  extends JFrame {
     private final int WIDTH = 750;
@@ -9,7 +11,7 @@ public class MainFrame  extends JFrame {
     public MainFrame(){
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
-       // setResizable(false);
+        //setResizable(false);
         setVisible(true);
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Dimension tamanoPantalla = miPantalla.getScreenSize();
@@ -23,15 +25,27 @@ public class MainFrame  extends JFrame {
         mensaje.setFont(new Font("Nuevo",1,45));
         panelBienvenida.add(mensaje);
         this.setContentPane(panelBienvenida);
-        this.setJMenuBar(new NavBar());
+        this.setJMenuBar(navBar());
     }
 
-    class NavBar extends JMenuBar{
-        NavBar(){
+    @Override
+    public void setContentPane(Container contentPane) {
+        super.setContentPane(contentPane);
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
+    private JMenuBar navBar(){
+            JMenuBar menuBar = new JMenuBar();
             JMenu menuFile = new JMenu("Archivo");
 
             //Opciones del menu Archivo
             JMenuItem newGame = new JMenuItem("Crear juego");
+            newGame.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    setContentPane(new CrearJuego());
+                }
+            });
             JMenuItem editGame = new JMenuItem("Editar juego");
             JMenu play = new JMenu("Jugar");
             JMenuItem nuevo = new JMenuItem("Nuevo");
@@ -47,8 +61,7 @@ public class MainFrame  extends JFrame {
             menuFile.add(play);
             menuFile.add(ranking);
             menuFile.add(about);
-            this.add(menuFile);
-
-        }
+            menuBar.add(menuFile);
+            return menuBar;
     }
 }
