@@ -1,18 +1,15 @@
 package com.achess.casillas;
 
+import java.awt.*;
+
 public class Servicio extends Propiedad {
-    private int costoServicio;
-
-    public Servicio(String nombre, int precioCompra, int precioHipoteca, int costoServicio) {
-        super(nombre, precioCompra, precioHipoteca);
-        this.costoServicio = costoServicio;
+    public Servicio(String nombre, int precioCompra, int precioHipoteca, Color fondo, int costoServicio) {
+        super(nombre, precioCompra, precioHipoteca, fondo, costoServicio);
     }
 
-    public int getCostoServicio() {
-        return costoServicio;
-    }
 
-    public void setCostoServicio(int costoServicio) {
-        this.costoServicio = costoServicio;
+    @Override
+    public void accion() {
+
     }
 }

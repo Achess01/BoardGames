@@ -1,8 +1,10 @@
 package com.achess.tarjetas;
 
+import com.achess.Utils;
+
 import java.io.Serializable;
 
-public class Tarjeta implements Serializable {
+public abstract class Tarjeta implements Serializable, Utils {
     public static int Cantidad = 0;
     private int id;
     private Tarjeta anterior;
@@ -15,6 +17,8 @@ public class Tarjeta implements Serializable {
         this.anterior = null;
         this.siguiente = null;
     }
+
+    public abstract void accion();
 
     public Tarjeta getAnterior() {
         return anterior;

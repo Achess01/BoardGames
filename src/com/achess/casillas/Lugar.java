@@ -1,20 +1,19 @@
 package com.achess.casillas;
 
+import java.awt.*;
+
 public class Lugar extends Propiedad {
 
     private int cantidadHoteles;
     private int cantidadCasas;
-    private int CostoEstancia;
     private int precioCasa;
     private int precioHotel;
     private int grupo;
 
-    public Lugar(String nombre, int precioCompra, int precioHipoteca,
-                 int cantidadHoteles, int cantidadCasas, int costoEstancia, int precioCasa, int precioHotel, int grupo) {
-        super(nombre, precioCompra, precioHipoteca);
+    public Lugar(String nombre, int precioCompra, int precioHipoteca, Color fondo, int cantidadHoteles, int cantidadCasas, int costoEstancia, int precioCasa, int precioHotel, int grupo) {
+        super(nombre, precioCompra, precioHipoteca, fondo, costoEstancia);
         this.cantidadHoteles = cantidadHoteles;
         this.cantidadCasas = cantidadCasas;
-        CostoEstancia = costoEstancia;
         this.precioCasa = precioCasa;
         this.precioHotel = precioHotel;
         this.grupo = grupo;
@@ -34,14 +33,6 @@ public class Lugar extends Propiedad {
 
     public void setCantidadCasas(int cantidadCasas) {
         this.cantidadCasas = cantidadCasas;
-    }
-
-    public int getCostoEstancia() {
-        return CostoEstancia;
-    }
-
-    public void setCostoEstancia(int costoEstancia) {
-        CostoEstancia = costoEstancia;
     }
 
     public int getPrecioCasa() {
@@ -66,5 +57,10 @@ public class Lugar extends Propiedad {
 
     public void setGrupo(int grupo) {
         this.grupo = grupo;
+    }
+
+    @Override
+    public void accion() {
+
     }
 }

@@ -1,18 +1,16 @@
 package com.achess.casillas;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class Estacion extends Propiedad {
-    private int costoUso;
 
-    public Estacion(String nombre, int precioCompra, int precioHipoteca, int costoUso) {
-        super(nombre, precioCompra, precioHipoteca);
-        this.costoUso = costoUso;
+    public Estacion(String nombre, int precioCompra, int precioHipoteca, Color fondo, int costoUso) {
+        super(nombre, precioCompra, precioHipoteca, fondo, costoUso);
     }
 
-    public int getCostoUso() {
-        return costoUso;
-    }
+    @Override
+    public void accion() {
 
-    public void setCostoUso(int costoUso) {
-        this.costoUso = costoUso;
     }
 }

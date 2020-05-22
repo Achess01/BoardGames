@@ -2,8 +2,8 @@ package com.achess.casillas;
 
 import java.awt.*;
 
-public class Neutro extends Casilla{
-    public Neutro(String nombre, Color fondo) {
+public class Carcel extends Casilla{
+    public Carcel(String nombre, Color fondo) {
         super(nombre, fondo);
     }
 
