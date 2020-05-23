@@ -1,6 +1,8 @@
 package com.achess;
 import com.achess.casillas.*;
 import com.achess.gui.*;
+import com.achess.tarjetas.TMulta;
+import com.achess.tarjetas.TVayaCarcel;
 
 import java.awt.*;
 

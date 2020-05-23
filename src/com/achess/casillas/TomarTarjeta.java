@@ -7,9 +7,10 @@ import java.awt.*;
 public class TomarTarjeta extends Casilla {
     private ListaTarjetas lista;
 
-    public TomarTarjeta(String nombre, Color fondo, ListaTarjetas lista) {
-        super(nombre, fondo);
+    public TomarTarjeta(String nombre, ListaTarjetas lista) {
+        super(nombre);
         this.lista = lista;
+        setFondo(Casilla.COLORES_CASILLAS[1]);
     }
 
 

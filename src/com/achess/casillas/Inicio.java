@@ -5,8 +5,9 @@ import java.io.Serializable;
 
 public class Inicio extends Casilla{
 
-    public Inicio(String nombre, Color fondo) {
-        super(nombre, fondo);
+    public Inicio(String nombre) {
+        super(nombre);
+        setFondo(Casilla.COLORES_CASILLAS[0]);
     }
 
     @Override

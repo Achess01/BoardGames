@@ -11,7 +11,7 @@ public class Lugar extends Propiedad {
     private int grupo;
 
     public Lugar(String nombre, int precioCompra, int precioHipoteca, Color fondo, int cantidadHoteles, int cantidadCasas, int costoEstancia, int precioCasa, int precioHotel, int grupo) {
-        super(nombre, precioCompra, precioHipoteca, fondo, costoEstancia);
+        super(nombre, precioCompra, precioHipoteca, costoEstancia);
         this.cantidadHoteles = cantidadHoteles;
         this.cantidadCasas = cantidadCasas;
         this.precioCasa = precioCasa;
