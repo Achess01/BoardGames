@@ -10,8 +10,6 @@ import java.io.Serializable;
 public abstract class Casilla extends JPanel implements Serializable{
     public static final Color COLORES_CASILLAS[] = {Color.WHITE, Color.CYAN,
     Color.DARK_GRAY, Color.LIGHT_GRAY, Color.BLACK, Color.PINK};
-    public static final Color COLORES_LUGARES[] = {Color.BLUE, Color.RED, Color.YELLOW,
-    Color.GREEN, Color.ORANGE};
     private Color fondo;
     private String nombre;
     private Jugador jugadores[] = new Jugador[0];

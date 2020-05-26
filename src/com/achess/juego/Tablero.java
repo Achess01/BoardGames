@@ -20,6 +20,7 @@ public class Tablero implements Serializable, Utils {
     private int cantidadCasas;
     private int cantidadHoteles;
     private int interes;
+    private Grupo grupos;
     private ListaCasillas casillas = new ListaCasillas();
     private ListaJugadores jugadores = new ListaJugadores();
 
@@ -38,7 +39,7 @@ public class Tablero implements Serializable, Utils {
     }
 
     private void crear(){
-        int n1, n2, n3;
+        int n1, n2, n3, c, h;
       Casilla nuevo[] = new Casilla[0];
       int neutro = (int)Math.ceil(cantidadCasillas*0.05);
       int estacion = (int)Math.ceil(cantidadCasillas*0.07);
@@ -69,8 +70,57 @@ public class Tablero implements Serializable, Utils {
       for(int index = 0; index < tarjeta; index++){
           nuevo = agregar(nuevo, new TomarTarjeta("Tomar tarjeta", nuevasTarjetas()));
       }
+      grupos = new Grupo();
+      int grupo = 0;
+      for(int x = 0; x < lugar; x++){
+          n1 = numerosAleatorios(25, 35);
+          n2 = numerosAleatorios(120, 140);
+          n3 = numerosAleatorios(95, 110);
+          c = numerosAleatorios(50, 70);
+          h = numerosAleatorios(80, 100);
+          nuevo = agregar(nuevo, new Lugar(Character.toString(Lugar.nombres), n2, n3,cantidadHoteles, cantidadCasas,
+                  n1,c, h, grupo));
+          grupos.setCantidad(1,grupo);
+          grupo++;
+          if(grupo == 5){
+              grupo = 0;
+          }
+      }
+      casillas = escogerOrden(nuevo);
+      for(int x = 0; x < cantidadJugadores; x++){
+          jugadores.agregar(new Jugador(x));
+      }
     }
 
+    private ListaCasillas escogerOrden(Casilla casillas[]){
+        Boolean repetido;
+        int posiciones[] = new int[casillas.length];
+        int index;
+        for(int x = 0; x < casillas.length; x++){
+            repetido = false;
+            index = numerosAleatorios(0, casillas.length - 1);
+            for(int y = 0; y < x; y++){
+                if(index == posiciones[y]){
+                    repetido = true;
+                    break;
+                }
+            }
+            if(repetido){
+                x--;
+                continue;
+                //El for se repite hasta que el número creado no esté ya en el arreglo;
+            }
+            posiciones[x] = index;
+        }
+
+        ListaCasillas lista = new ListaCasillas();
+        lista.agregar(new Inicio("INICIO"));
+        for(int x = 0; x < casillas.length; x++){
+            lista.agregar(casillas[posiciones[x]]);
+        }
+
+        return lista;
+    }
     private Casilla[] agregar(Casilla arreglo[], Casilla elemento){
         Casilla a[] = new Casilla[arreglo.length +1];
         a[arreglo.length] = elemento;

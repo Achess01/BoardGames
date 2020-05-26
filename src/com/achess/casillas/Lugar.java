@@ -3,20 +3,26 @@ package com.achess.casillas;
 import java.awt.*;
 
 public class Lugar extends Propiedad {
-
+    public static final Color COLORES_LUGARES[] = {Color.BLUE, Color.RED, Color.YELLOW,
+            Color.GREEN, Color.ORANGE};
+    public static int nombres = 97;
     private int cantidadHoteles;
     private int cantidadCasas;
     private int precioCasa;
     private int precioHotel;
     private int grupo;
 
-    public Lugar(String nombre, int precioCompra, int precioHipoteca, Color fondo, int cantidadHoteles, int cantidadCasas, int costoEstancia, int precioCasa, int precioHotel, int grupo) {
+    public Lugar(String nombre, int precioCompra, int precioHipoteca,
+                 int cantidadHoteles, int cantidadCasas, int costoEstancia, int precioCasa, int precioHotel,
+                 int grupo) {
         super(nombre, precioCompra, precioHipoteca, costoEstancia);
         this.cantidadHoteles = cantidadHoteles;
         this.cantidadCasas = cantidadCasas;
         this.precioCasa = precioCasa;
         this.precioHotel = precioHotel;
         this.grupo = grupo;
+        setFondo(COLORES_LUGARES[this.grupo]);
+        nombres++;
     }
 
     public int getCantidadHoteles() {

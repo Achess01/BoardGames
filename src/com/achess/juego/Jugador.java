@@ -1,11 +1,12 @@
 package com.achess.juego;
 
+import com.achess.casillas.Casilla;
 import com.achess.casillas.Propiedad;
 
 import java.awt.*;
 
 public class Jugador {
-    public static final Color COLOR_FICHAS[] = {Color.BLUE, Color.CYAN, Color.GRAY, Color.YELLOW,
+    public static final Color COLOR_FICHA[] = {Color.BLUE, Color.CYAN, Color.GRAY, Color.YELLOW,
     Color.MAGENTA, Color.RED};
     private static int letra = 65;
     private String nombre;
@@ -14,12 +15,23 @@ public class Jugador {
     private int dinero;
     private Jugador siguiente;
     private Jugador anterior;
+    private Casilla actual;
+    private Color fondo;
 
-    public Jugador(){
+    public Jugador(int index){
         siguiente = null;
         anterior = null;
         nombre = Character.toString(letra);
         letra++;
+        this.fondo = COLOR_FICHA[index];
+    }
+
+    public Casilla getActual() {
+        return actual;
+    }
+
+    public void setActual(Casilla actual) {
+        this.actual = actual;
     }
 
     public String getNombre() {
