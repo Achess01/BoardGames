@@ -1,5 +1,7 @@
 package com.achess.gui;
 
+import com.achess.juego.Tablero;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,7 +45,10 @@ public class MainFrame  extends JFrame {
             newGame.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    setContentPane(new CrearJuego());
+                    Tablero t = new Tablero("Juego", 3, 1400, 25,
+                            200, 2, 2, 2, 20);
+                    EspacioJuego espacioJuego = new EspacioJuego(t);
+                    setContentPane(espacioJuego);
                 }
             });
             JMenuItem editGame = new JMenuItem("Editar juego");

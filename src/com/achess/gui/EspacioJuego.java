@@ -7,16 +7,19 @@ import com.achess.listas.ListaCasillas;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.io.Serializable;
 
-public class EspacioJuego extends JPanel {
+public class EspacioJuego extends JPanel implements Serializable {
     private JPanel tablero;
     private JPanel sur;
     private JPanel oeste;
     private JPanel norte;
     private JPanel este;
-    public EspacioJuego(Tablero tablero){
-        int tamanio = tablero.getCasillas().getTamanio();
-        ListaCasillas listaCasilla = tablero.getCasillas();
+    private Tablero campo;
+    public EspacioJuego(Tablero campo){
+        this.campo = campo;
+        int tamanio = this.campo.getCasillas().getTamanio();
+        ListaCasillas listaCasilla = this.campo.getCasillas();
         sur = new JPanel();
         sur.setBorder(new LineBorder(Color.BLACK));
         oeste = new JPanel();
@@ -26,7 +29,7 @@ public class EspacioJuego extends JPanel {
         norte.setBorder(new LineBorder(Color.BLACK));
         este = new JPanel();
         este.setBorder(new LineBorder(Color.BLACK));
-        este.setLayout(new BoxLayout(oeste, BoxLayout.Y_AXIS));
+        este.setLayout(new BoxLayout(este, BoxLayout.Y_AXIS));
         int s = tamanio/4;
         int o = s;
         int n = o;
@@ -34,7 +37,8 @@ public class EspacioJuego extends JPanel {
         Casilla aux;
         aux = listaCasilla.getInicio();
         sur.add(aux);
-        for(int x = 0; x < tamanio; x++){
+        System.out.println(tamanio);
+        for(int x = 0; x < tamanio - 1; x++){
             aux = aux.getSiguiente();
             if(x < s){
                 sur.add(aux);
@@ -47,7 +51,7 @@ public class EspacioJuego extends JPanel {
             else if(x < (s + o + n)){
                 norte.add(aux);
             }
-            else{
+            else if(x < (s+o+n+e)){
                 este.add(aux);
             }
 

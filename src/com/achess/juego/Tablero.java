@@ -21,8 +21,9 @@ public class Tablero implements Serializable, Utils {
     private int cantidadHoteles;
     private int interes;
     private Grupo grupos;
-    private ListaCasillas casillas = new ListaCasillas();
-    private ListaJugadores jugadores = new ListaJugadores();
+    private ListaCasillas casillas;
+    private ListaJugadores jugadores;
+    private Grupo grupo;
 
     public Tablero(String nombre, int cantidadJugadores, int cantidadDinero, int cantidadCasillas,
                    int cantidadDineroPorVuelta, int cantidadDados, int cantidadCasas,
@@ -36,6 +37,7 @@ public class Tablero implements Serializable, Utils {
         this.cantidadCasas = cantidadCasas;
         this.cantidadHoteles = cantidadHoteles;
         this.interes = interes;
+        crear();
     }
 
     private void crear(){
@@ -87,6 +89,7 @@ public class Tablero implements Serializable, Utils {
           }
       }
       casillas = escogerOrden(nuevo);
+      jugadores = new ListaJugadores();
       for(int x = 0; x < cantidadJugadores; x++){
           jugadores.agregar(new Jugador(x));
       }
@@ -115,7 +118,7 @@ public class Tablero implements Serializable, Utils {
 
         ListaCasillas lista = new ListaCasillas();
         lista.agregar(new Inicio("INICIO"));
-        for(int x = 0; x < casillas.length; x++){
+        for(int x = 1; x < casillas.length; x++){
             lista.agregar(casillas[posiciones[x]]);
         }
 
