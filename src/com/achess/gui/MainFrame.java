@@ -49,6 +49,7 @@ public class MainFrame  extends JFrame {
                             200, 2, 2, 2, 20);
                     EspacioJuego espacioJuego = new EspacioJuego(t);
                     setContentPane(espacioJuego);
+                    pack();
                 }
             });
             JMenuItem editGame = new JMenuItem("Editar juego");

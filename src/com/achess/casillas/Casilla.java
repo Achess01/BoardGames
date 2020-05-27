@@ -21,7 +21,6 @@ public abstract class Casilla extends JPanel implements Serializable{
         this.nombre = nombre;
         this.anterior = null;
         this.siguiente = null;
-        this.fondo = fondo;
         setLayout(new GridLayout(3, 1, 10, 0));
         espacioJugadores = new JPanel();
         espacioJugadores.setLayout(new GridLayout(2, 3, 20, 20));
@@ -30,7 +29,6 @@ public abstract class Casilla extends JPanel implements Serializable{
         add(t);
         add(espacioJugadores);
         setBorder(new LineBorder(this.fondo));
-        setBackground(this.fondo);
     }
 
     public abstract void accion();
@@ -65,6 +63,7 @@ public abstract class Casilla extends JPanel implements Serializable{
 
     public void setFondo(Color fondo) {
         this.fondo = fondo;
+        setBackground(this.fondo);
     }
 
     public Jugador[] getJugadores() {

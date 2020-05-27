@@ -118,7 +118,7 @@ public class Tablero implements Serializable, Utils {
 
         ListaCasillas lista = new ListaCasillas();
         lista.agregar(new Inicio("INICIO"));
-        for(int x = 1; x < casillas.length; x++){
+        for(int x = 0; x < casillas.length; x++){
             lista.agregar(casillas[posiciones[x]]);
         }
 

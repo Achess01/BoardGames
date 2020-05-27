@@ -56,10 +56,13 @@ public class EspacioJuego extends JPanel implements Serializable {
             }
 
         }
-        add(sur, BorderLayout.SOUTH);
-        add(oeste, BorderLayout.WEST);
-        add(norte, BorderLayout.NORTH);
-        add(este, BorderLayout.EAST);
+        tablero = new JPanel();
+        tablero.setLayout(new BorderLayout());
+        tablero.add(sur, BorderLayout.SOUTH);
+        tablero.add(oeste, BorderLayout.WEST);
+        tablero.add(norte, BorderLayout.NORTH);
+        tablero.add(este, BorderLayout.EAST);
+        add(tablero);
     }
 
     private void cambiarOrden(JPanel component){
