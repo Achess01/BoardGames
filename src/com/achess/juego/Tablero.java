@@ -131,6 +131,30 @@ public class Tablero implements Serializable, Utils {
         return a;
     }
 
+    public Grupo getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(Grupo grupos) {
+        this.grupos = grupos;
+    }
+
+    public ListaCasillas getCasillas() {
+        return casillas;
+    }
+
+    public void setCasillas(ListaCasillas casillas) {
+        this.casillas = casillas;
+    }
+
+    public ListaJugadores getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(ListaJugadores jugadores) {
+        this.jugadores = jugadores;
+    }
+
     private ListaTarjetas nuevasTarjetas(){
         ListaTarjetas lista = new ListaTarjetas();
         return  lista;
