@@ -11,7 +11,7 @@ public class MainFrame  extends JFrame {
     private final int WIDTH = 750;
     private final int  HEIGHT = 450;
     public MainFrame(){
-        setSize(WIDTH, HEIGHT);
+       // setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
         //setResizable(false);
         setVisible(true);
@@ -26,8 +26,8 @@ public class MainFrame  extends JFrame {
         JLabel mensaje = new JLabel("BIENVENIDO");
         mensaje.setFont(new Font("Nuevo",1,45));
         panelBienvenida.add(mensaje);
-        this.setContentPane(panelBienvenida);
         this.setJMenuBar(navBar());
+        this.setContentPane(panelBienvenida);
     }
 
     @Override
@@ -49,6 +49,7 @@ public class MainFrame  extends JFrame {
                             200, 2, 2, 2, 20);
                     EspacioJuego espacioJuego = new EspacioJuego(t);
                     setContentPane(espacioJuego);
+                    t.getCasillas().listar();
                     pack();
                 }
             });

@@ -28,6 +28,8 @@ public class Tablero implements Serializable, Utils {
     public Tablero(String nombre, int cantidadJugadores, int cantidadDinero, int cantidadCasillas,
                    int cantidadDineroPorVuelta, int cantidadDados, int cantidadCasas,
                    int cantidadHoteles, int interes) {
+        Jugador.letra = 65;
+        Lugar.nombres = 97;
         this.nombre = nombre;
         this.cantidadJugadores = cantidadJugadores;
         this.cantidadDinero = cantidadDinero;
@@ -44,10 +46,10 @@ public class Tablero implements Serializable, Utils {
         int n1, n2, n3, c, h;
       Casilla nuevo[] = new Casilla[0];
       int neutro = (int)Math.ceil(cantidadCasillas*0.05);
-      int estacion = (int)Math.ceil(cantidadCasillas*0.07);
-      int servicio =  (int)Math.ceil(cantidadCasillas*0.1);
+      int estacion = (int)Math.ceil(cantidadCasillas*0.0);
+      int servicio =  (int)Math.ceil(cantidadCasillas*0.08);
       int carcel = (int)Math.ceil(cantidadCasillas*0.07);
-      int tarjeta = (int)Math.ceil(cantidadCasillas*0.1);
+      int tarjeta = (int)Math.ceil(cantidadCasillas*0.08);
       int lugar = cantidadCasillas - (neutro+estacion+servicio+carcel+tarjeta+1);
 
       for(int index = 0; index < neutro; index++){

@@ -104,4 +104,14 @@ public abstract class Casilla extends JPanel implements Serializable{
             return newObjetos;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Casilla{" +
+                "fondo=" + fondo +
+                ", nombre='" + nombre + '\'' +
+                ", anterior=" + anterior.nombre +
+                ", siguiente=" + siguiente.nombre +
+                '}';
+    }
 }

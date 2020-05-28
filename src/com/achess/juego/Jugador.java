@@ -8,7 +8,7 @@ import java.awt.*;
 public class Jugador {
     public static final Color COLOR_FICHA[] = {Color.BLUE, Color.CYAN, Color.GRAY, Color.YELLOW,
     Color.MAGENTA, Color.RED};
-    private static int letra = 65;
+    public static int letra = 65;
     private String nombre;
     private Propiedad propiedades[];
     private int salirCarcel;

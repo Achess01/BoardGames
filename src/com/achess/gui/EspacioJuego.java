@@ -42,11 +42,9 @@ public class EspacioJuego extends JPanel implements Serializable {
             aux = aux.getSiguiente();
             if(x < s){
                 sur.add(aux);
-                cambiarOrden(sur);
             }
             else if(x < (s + o)){
                 oeste.add(aux);
-                cambiarOrden(oeste);
             }
             else if(x < (s + o + n)){
                 norte.add(aux);
@@ -57,6 +55,8 @@ public class EspacioJuego extends JPanel implements Serializable {
 
         }
         tablero = new JPanel();
+        cambiarOrden(sur);
+        cambiarOrden(oeste);
         tablero.setLayout(new BorderLayout());
         tablero.add(sur, BorderLayout.SOUTH);
         tablero.add(oeste, BorderLayout.WEST);

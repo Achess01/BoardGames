@@ -16,7 +16,7 @@ public abstract class Propiedad extends Casilla {
         this.precioCompra = precioCompra;
         this.precioHipoteca = precioHipoteca;
         this.costoUso = costoUso;
-        add(new JLabel( "Q " + costoUso, JLabel.CENTER));
+        add(new JLabel( "Q " + precioCompra, JLabel.CENTER));
     }
 
     public Jugador getDuenio() {

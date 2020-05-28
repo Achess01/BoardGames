@@ -46,7 +46,14 @@ public class ListaCasillas implements Serializable {
         }
         tamanio++;
     }
-    
+
+    public void listar(){
+        Casilla aux = inicio;
+        for(int x = 0; x < tamanio; x++){
+            System.out.println(aux);
+            aux = aux.getSiguiente();
+        }
+    }
     public void correrLugares(){
         inicio = inicio.getSiguiente();
     }
