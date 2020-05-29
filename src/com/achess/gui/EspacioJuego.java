@@ -10,6 +10,8 @@ import java.awt.*;
 import java.io.Serializable;
 
 public class EspacioJuego extends JPanel implements Serializable {
+    public static JPanel dados = new JPanel();
+    private JButton moverDados = new JButton("Listo");
     private JPanel tablero;
     private JPanel sur;
     private JPanel oeste;
@@ -19,9 +21,14 @@ public class EspacioJuego extends JPanel implements Serializable {
     private Tablero campo;
 
     public EspacioJuego(Tablero campo){
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.campo = campo;
         int tamanio = this.campo.getCasillas().getTamanio();
         ListaCasillas listaCasilla = this.campo.getCasillas();
+        //moverDados.setPreferredSize(new Dimension(50, 50));
+        centro.setLayout(new GridBagLayout());
+        dados.add(moverDados);
+        centro.add(dados);
         sur = new JPanel();
         sur.setBorder(new LineBorder(Color.BLACK));
         sur.setLayout(new BoxLayout(sur, BoxLayout.X_AXIS));
@@ -68,6 +75,8 @@ public class EspacioJuego extends JPanel implements Serializable {
         tablero.add(este, BorderLayout.EAST);
         tablero.add(centro, BorderLayout.CENTER);
         add(tablero);
+
+
     }
 
     private void cambiarOrden(JPanel component){

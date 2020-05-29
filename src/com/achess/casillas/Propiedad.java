@@ -17,7 +17,6 @@ public abstract class Propiedad extends Casilla {
         this.precioCompra = precioCompra;
         this.precioHipoteca = precioHipoteca;
         this.costoUso = costoUso;
-        add(new JLabel( "Q " + precioCompra, JLabel.CENTER));
     }
 
     @Override

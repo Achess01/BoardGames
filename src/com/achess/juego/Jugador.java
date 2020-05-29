@@ -3,14 +3,15 @@ package com.achess.juego;
 import com.achess.casillas.Casilla;
 import com.achess.casillas.Propiedad;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class Jugador {
+public class Jugador extends JPanel {
     public static final Color COLOR_FICHA[] = {Color.BLUE, Color.CYAN, Color.GRAY, Color.YELLOW,
     Color.MAGENTA, Color.RED};
     public static int letra = 65;
     private String nombre;
-    private Propiedad propiedades[];
+    private Propiedad propiedades[] = new Propiedad[0];
     private int salirCarcel;
     private int dinero;
     private Jugador siguiente;
@@ -19,13 +20,27 @@ public class Jugador {
     private Color fondo;
 
     public Jugador(int index){
+        salirCarcel = 0;
+        actual = null;
         siguiente = null;
         anterior = null;
         nombre = Character.toString(letra);
         letra++;
         this.fondo = COLOR_FICHA[index];
+        //setPreferredSize(new Dimension(30, 50));
+        setBackground(this.fondo);
+        add(new Label(nombre), JLabel.CENTER);
     }
 
+    public void mover(Casilla casilla){
+        if(actual != null){
+            actual.getEspacioJugadores().remove(this);
+            SwingUtilities.updateComponentTreeUI(actual);
+        }
+        actual = casilla;
+        casilla.getEspacioJugadores().add(this);
+        SwingUtilities.updateComponentTreeUI(actual);
+    }
     public Casilla getActual() {
         return actual;
     }

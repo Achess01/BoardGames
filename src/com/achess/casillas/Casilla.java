@@ -17,20 +17,21 @@ public abstract class Casilla extends JPanel implements Serializable{
     Color.DARK_GRAY, Color.LIGHT_GRAY, Color.BLACK, Color.PINK};
     private Color fondo;
     private String nombre;
-    private Jugador jugadores[] = new Jugador[0];
     private Casilla anterior;
     private Casilla siguiente;
     private JPanel espacioJugadores;
     private JPanel inf = new JPanel();
+    private boolean agregado;
 
     public Casilla(String nombre){
+        agregado = false;
         this.nombre = nombre;
         this.anterior = null;
         this.siguiente = null;
         inf.setLayout(new BoxLayout(inf, BoxLayout.Y_AXIS));
-        setLayout(new GridLayout(3, 1, 10, 0));
+        setLayout(new GridLayout(2, 1));
         espacioJugadores = new JPanel();
-        espacioJugadores.setLayout(new GridLayout(2, 3, 20, 20));
+        espacioJugadores.setLayout(new GridLayout(2, 3));
         JLabel t = new JLabel(this.nombre, JLabel.CENTER);
         add(t);
         add(espacioJugadores);
@@ -39,7 +40,7 @@ public abstract class Casilla extends JPanel implements Serializable{
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                setNombre("chuy");
+
             }
 
             @Override
@@ -61,7 +62,7 @@ public abstract class Casilla extends JPanel implements Serializable{
 
             @Override
             public void mouseExited(MouseEvent mouseEvent) {
-                EspacioJuego.centro.removeAll();
+                EspacioJuego.centro.remove(inf);
                 SwingUtilities.updateComponentTreeUI(EspacioJuego.centro);
             }
         });
@@ -119,43 +120,12 @@ public abstract class Casilla extends JPanel implements Serializable{
         espacioJugadores.setBorder(new LineBorder(this.fondo));
     }
 
-    public Jugador[] getJugadores() {
-        return jugadores;
-    }
-
-    public void setJugadores(Jugador[] jugadores) {
-        this.jugadores = jugadores;
-    }
-
     public JPanel getEspacioJugadores() {
         return espacioJugadores;
     }
 
     public void setEspacioJugadores(JPanel espacioJugadores) {
         this.espacioJugadores = espacioJugadores;
-    }
-
-    public Jugador[] agregarJugadores(Jugador obj, Jugador[] objetos, boolean validar){
-        if(validar) {
-            Jugador newObjetos[] = new Jugador[objetos.length + 1];
-            newObjetos[0] = obj;
-            for (int x = 1; x < newObjetos.length; x++) {
-                newObjetos[x] = objetos[x - 1];
-            }
-            return newObjetos;
-        }
-        else{
-            Jugador newObjetos[] = new Jugador[objetos.length - 1];
-            for (int x = 0; x < newObjetos.length; x++) {
-                if(obj.equals(objetos[x])){
-                    for(int y = x; y < newObjetos.length; y++){
-                        objetos[x] = objetos[x+1];
-                    }
-                }
-                newObjetos[x] = objetos[x];
-            }
-            return newObjetos;
-        }
     }
 
     @Override

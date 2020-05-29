@@ -45,7 +45,7 @@ public class MainFrame  extends JFrame {
             newGame.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    Tablero t = new Tablero("Juego", 3, 1400, 27,
+                    Tablero t = new Tablero("Juego", 6, 1400, 27,
                             200, 2, 2, 2, 20);
                     EspacioJuego espacioJuego = new EspacioJuego(t);
                     setContentPane(espacioJuego);

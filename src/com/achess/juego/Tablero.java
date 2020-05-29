@@ -95,6 +95,13 @@ public class Tablero implements Serializable, Utils {
       for(int x = 0; x < cantidadJugadores; x++){
           jugadores.agregar(new Jugador(x));
       }
+
+      Jugador au;
+      au = jugadores.getInicio();
+      for(int x = 0; x < cantidadJugadores; x++){
+          au.mover(casillas.getInicio());
+          au = au.getSiguiente();
+      }
     }
 
     private ListaCasillas escogerOrden(Casilla casillas[]){
