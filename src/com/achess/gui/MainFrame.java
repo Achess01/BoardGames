@@ -23,7 +23,7 @@ public class MainFrame  extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Juegos de mesa");
         JPanel panelBienvenida = new JPanel();
-        JLabel mensaje = new JLabel("BIENVENIDO");
+        JLabel mensaje = new JLabel("BIENVENIDO", JLabel.CENTER);
         mensaje.setFont(new Font("Nuevo",1,45));
         panelBienvenida.add(mensaje);
         this.setJMenuBar(navBar());
@@ -45,7 +45,7 @@ public class MainFrame  extends JFrame {
             newGame.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    Tablero t = new Tablero("Juego", 3, 1400, 25,
+                    Tablero t = new Tablero("Juego", 3, 1400, 27,
                             200, 2, 2, 2, 20);
                     EspacioJuego espacioJuego = new EspacioJuego(t);
                     setContentPane(espacioJuego);

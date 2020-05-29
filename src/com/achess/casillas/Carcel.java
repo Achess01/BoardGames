@@ -1,6 +1,7 @@
 package com.achess.casillas;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class Carcel extends Casilla{
     public Carcel(String nombre) {
@@ -12,4 +13,5 @@ public class Carcel extends Casilla{
     public void accion() {
 
     }
+
 }

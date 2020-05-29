@@ -11,6 +11,8 @@ public class Lugar extends Propiedad {
     private int precioCasa;
     private int precioHotel;
     private int grupo;
+    private int casas;
+    private int hoteles;
 
     public Lugar(String nombre, int precioCompra, int precioHipoteca,
                  int cantidadHoteles, int cantidadCasas, int costoEstancia, int precioCasa, int precioHotel,
@@ -21,8 +23,34 @@ public class Lugar extends Propiedad {
         this.precioCasa = precioCasa;
         this.precioHotel = precioHotel;
         this.grupo = grupo;
+        casas = 0;
+        hoteles = 0;
         setFondo(COLORES_LUGARES[this.grupo]);
         nombres++;
+
+    }
+
+    @Override
+    public void AgregarInfo() {
+        super.AgregarInfo();
+        setInfo("Casas", casas + "/" + cantidadCasas);
+        setInfo("Hoteles", hoteles + "/" + cantidadHoteles);
+    }
+
+    public int getCasas() {
+        return casas;
+    }
+
+    public void setCasas(int casas) {
+        this.casas = casas;
+    }
+
+    public int getHoteles() {
+        return hoteles;
+    }
+
+    public void setHoteles(int hoteles) {
+        this.hoteles = hoteles;
     }
 
     public int getCantidadHoteles() {

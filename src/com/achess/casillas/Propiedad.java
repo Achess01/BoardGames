@@ -13,10 +13,20 @@ public abstract class Propiedad extends Casilla {
     private boolean hipoteca = false;
     public Propiedad(String nombre, int precioCompra, int precioHipoteca, int costoUso) {
         super(nombre);
+        duenio = null;
         this.precioCompra = precioCompra;
         this.precioHipoteca = precioHipoteca;
         this.costoUso = costoUso;
         add(new JLabel( "Q " + precioCompra, JLabel.CENTER));
+    }
+
+    @Override
+    public void AgregarInfo() {
+        super.AgregarInfo();
+        setInfo("Dueño", (duenio == null ? "Sin dueño": duenio.getNombre()));
+        setInfo("Precio compra",  "Q "+ precioCompra);
+        setInfo("Precio hipoteca",  "Q "+ precioHipoteca);
+        setInfo("Precio estancia",  "Q "+ costoUso);
     }
 
     public Jugador getDuenio() {

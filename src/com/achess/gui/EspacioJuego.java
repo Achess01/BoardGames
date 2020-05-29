@@ -15,25 +15,29 @@ public class EspacioJuego extends JPanel implements Serializable {
     private JPanel oeste;
     private JPanel norte;
     private JPanel este;
+    public static JPanel centro = new JPanel();
     private Tablero campo;
+
     public EspacioJuego(Tablero campo){
         this.campo = campo;
         int tamanio = this.campo.getCasillas().getTamanio();
         ListaCasillas listaCasilla = this.campo.getCasillas();
         sur = new JPanel();
         sur.setBorder(new LineBorder(Color.BLACK));
+        sur.setLayout(new BoxLayout(sur, BoxLayout.X_AXIS));
         oeste = new JPanel();
         oeste.setBorder(new LineBorder(Color.BLACK));
         oeste.setLayout(new BoxLayout(oeste, BoxLayout.Y_AXIS));
         norte = new JPanel();
         norte.setBorder(new LineBorder(Color.BLACK));
+        norte.setLayout(new BoxLayout(norte, BoxLayout.X_AXIS));
         este = new JPanel();
         este.setBorder(new LineBorder(Color.BLACK));
         este.setLayout(new BoxLayout(este, BoxLayout.Y_AXIS));
-        int s = tamanio/4;
-        int o = s;
+        int s = tamanio/4 + tamanio%4;
+        int o = tamanio/4;
         int n = o;
-        int e = n + tamanio%4;
+        int e = n;
         Casilla aux;
         aux = listaCasilla.getInicio();
         sur.add(aux);
@@ -62,6 +66,7 @@ public class EspacioJuego extends JPanel implements Serializable {
         tablero.add(oeste, BorderLayout.WEST);
         tablero.add(norte, BorderLayout.NORTH);
         tablero.add(este, BorderLayout.EAST);
+        tablero.add(centro, BorderLayout.CENTER);
         add(tablero);
     }
 
