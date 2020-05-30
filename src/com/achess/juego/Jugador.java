@@ -8,8 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 
-public class Jugador extends JPanel {
+public class Jugador extends JPanel implements Serializable {
     public static final Color COLOR_FICHA[] = {Color.BLUE, Color.CYAN, Color.GRAY, Color.YELLOW,
     Color.MAGENTA, Color.RED};
     public static int letra = 65;
@@ -114,4 +115,5 @@ public class Jugador extends JPanel {
     public void setAnterior(Jugador anterior) {
         this.anterior = anterior;
     }
+
 }

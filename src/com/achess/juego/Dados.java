@@ -35,18 +35,12 @@ public class Dados extends JLabel implements Runnable, Serializable, Utils {
         EspacioJuego.dados.add(this);
         for(int x = 0; x < 10; x++){
             setText("   " + numerosAleatorios(1, 6) + "   ");
-            esperarXsegundos(200);
+            esperarXsegundos(100);
             SwingUtilities.updateComponentTreeUI(this);
         }
         setText("   " + getValor() + "   ");
         SwingUtilities.updateComponentTreeUI(this);
     }
 
-    private void esperarXsegundos(int milisegundos) {
-        try {
-            Thread.sleep(milisegundos);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-    }
+
 }

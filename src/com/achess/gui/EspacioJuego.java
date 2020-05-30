@@ -1,5 +1,6 @@
 package com.achess.gui;
 
+import com.achess.Utils;
 import com.achess.casillas.Casilla;
 import com.achess.juego.Dados;
 import com.achess.juego.Jugador;
@@ -14,7 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 
-public class EspacioJuego extends JPanel implements Serializable {
+public class EspacioJuego extends JPanel implements Serializable, Utils, Runnable {
     public static JPanel dados = new JPanel();
     private JPanel contenedorDados;
     private JButton moverDados;
@@ -99,6 +100,7 @@ public class EspacioJuego extends JPanel implements Serializable {
         moverDados.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                moverDados.setEnabled(false);
                 dados.removeAll();
                 Thread Tdados[] = new Thread[campo.getCantidadDados()];
                 int valoresDados[] = new int[Tdados.length];
@@ -113,7 +115,10 @@ public class EspacioJuego extends JPanel implements Serializable {
                     it++;
                     SwingUtilities.updateComponentTreeUI(centro);
                 }
+
                 SwingUtilities.updateComponentTreeUI(centro);
+                Thread m = new Thread(EspacioJuego.this::run);
+                m.start();
                 campo.getTurno().comprobarDados(valoresDados);
             }
         });
@@ -127,6 +132,7 @@ public class EspacioJuego extends JPanel implements Serializable {
         for(int x = 0; x < l.getTamanio(); x++){
             infoJugador.add(new Label("Nombre: " + j.getNombre()));
             infoJugador.add(new Label("Dinero: Q" + j.getDinero()));
+            infoJugador.add(new Label("Casilla actual: " + j.getActual()));
             infoJugador.add(new Label("____________________________"));
             j = j.getSiguiente();
         }
@@ -137,5 +143,11 @@ public class EspacioJuego extends JPanel implements Serializable {
         for (int x = lista.length - 1; x >= 0; x--){
             component.add(lista[x]);
         }
+    }
+
+    @Override
+    public void run() {
+        mostrarJugadores();
+        moverDados.setEnabled(true);
     }
 }

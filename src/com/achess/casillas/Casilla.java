@@ -130,7 +130,7 @@ public abstract class Casilla extends JPanel implements Serializable{
 
     @Override
     public String toString() {
-        return "nombre='" + nombre + '\'' + "\n";
+        return "='" + nombre + '\'' + "\n";
     }
 }
 

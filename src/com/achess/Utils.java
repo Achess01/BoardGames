@@ -6,4 +6,12 @@ public interface Utils {
         return aleatorio;
     }
 
+    default void esperarXsegundos(int milisegundos) {
+        try {
+            Thread.sleep(milisegundos);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
 }
