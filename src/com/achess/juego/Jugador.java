@@ -2,9 +2,12 @@ package com.achess.juego;
 
 import com.achess.casillas.Casilla;
 import com.achess.casillas.Propiedad;
+import com.achess.gui.EspacioJuego;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Jugador extends JPanel {
     public static final Color COLOR_FICHA[] = {Color.BLUE, Color.CYAN, Color.GRAY, Color.YELLOW,
@@ -19,7 +22,8 @@ public class Jugador extends JPanel {
     private Casilla actual;
     private Color fondo;
 
-    public Jugador(int index){
+    public Jugador(int index, int dinero){
+        this.dinero = dinero;
         salirCarcel = 0;
         actual = null;
         siguiente = null;
@@ -40,6 +44,20 @@ public class Jugador extends JPanel {
         actual = casilla;
         casilla.getEspacioJugadores().add(this);
         SwingUtilities.updateComponentTreeUI(actual);
+    }
+
+    public void comprobarDados(int valoresDados[]){
+        int suma = 0;
+        for (int valor : valoresDados) {
+            suma += valor;
+            System.out.println(valor);
+        }
+        Casilla aux = actual;
+        for (int i = 0; i < suma; i++) {
+            aux = aux.getSiguiente();
+        }
+        System.out.println(suma);
+        mover(aux);
     }
     public Casilla getActual() {
         return actual;

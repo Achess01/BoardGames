@@ -24,6 +24,7 @@ public class Tablero implements Serializable, Utils {
     private ListaCasillas casillas;
     private ListaJugadores jugadores;
     private Grupo grupo;
+    private Jugador turno;
 
     public Tablero(String nombre, int cantidadJugadores, int cantidadDinero, int cantidadCasillas,
                    int cantidadDineroPorVuelta, int cantidadDados, int cantidadCasas,
@@ -93,15 +94,31 @@ public class Tablero implements Serializable, Utils {
       casillas = escogerOrden(nuevo);
       jugadores = new ListaJugadores();
       for(int x = 0; x < cantidadJugadores; x++){
-          jugadores.agregar(new Jugador(x));
+          jugadores.agregar(new Jugador(x, cantidadDinero));
       }
-
+      setTurnoInicial();
       Jugador au;
       au = jugadores.getInicio();
       for(int x = 0; x < cantidadJugadores; x++){
           au.mover(casillas.getInicio());
           au = au.getSiguiente();
       }
+    }
+
+    private void setTurnoInicial(){
+        int iniciar = numerosAleatorios(0, jugadores.getTamanio());
+        for (int i = 0; i < iniciar; i++) {
+            jugadores.correrLugares();
+        }
+        turno = jugadores.getInicio();
+    }
+
+    public Jugador getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Jugador turno) {
+        this.turno = turno;
     }
 
     private ListaCasillas escogerOrden(Casilla casillas[]){

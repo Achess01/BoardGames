@@ -1,17 +1,23 @@
 package com.achess.gui;
 
 import com.achess.casillas.Casilla;
+import com.achess.juego.Dados;
+import com.achess.juego.Jugador;
 import com.achess.juego.Tablero;
 import com.achess.listas.ListaCasillas;
+import com.achess.listas.ListaJugadores;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 
 public class EspacioJuego extends JPanel implements Serializable {
     public static JPanel dados = new JPanel();
-    private JButton moverDados = new JButton("Listo");
+    private JPanel contenedorDados;
+    private JButton moverDados;
     private JPanel tablero;
     private JPanel sur;
     private JPanel oeste;
@@ -19,16 +25,30 @@ public class EspacioJuego extends JPanel implements Serializable {
     private JPanel este;
     public static JPanel centro = new JPanel();
     private Tablero campo;
+    private JPanel infoJugador;
 
     public EspacioJuego(Tablero campo){
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.campo = campo;
+        centro.removeAll();
+        dados.removeAll();
+        //Dados
+        dados.setLayout(new BoxLayout(dados, BoxLayout.Y_AXIS));
+        moverDados = new JButton("Listo");
+        contenedorDados = new JPanel();
+        contenedorDados.setLayout(new BoxLayout(contenedorDados, BoxLayout.Y_AXIS));
+        contenedorDados.add(moverDados);
+        contenedorDados.add(dados);
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         int tamanio = this.campo.getCasillas().getTamanio();
         ListaCasillas listaCasilla = this.campo.getCasillas();
         //moverDados.setPreferredSize(new Dimension(50, 50));
+        infoJugador = new JPanel();
+        infoJugador.setLayout(new BoxLayout(infoJugador, BoxLayout.Y_AXIS));
+        mostrarJugadores();
         centro.setLayout(new GridBagLayout());
-        dados.add(moverDados);
-        centro.add(dados);
+        centro.add(contenedorDados);
+        centro.add(infoJugador);
+        centro.add(infoJugador);
         sur = new JPanel();
         sur.setBorder(new LineBorder(Color.BLACK));
         sur.setLayout(new BoxLayout(sur, BoxLayout.X_AXIS));
@@ -76,9 +96,41 @@ public class EspacioJuego extends JPanel implements Serializable {
         tablero.add(centro, BorderLayout.CENTER);
         add(tablero);
 
+        moverDados.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dados.removeAll();
+                Thread Tdados[] = new Thread[campo.getCantidadDados()];
+                int valoresDados[] = new int[Tdados.length];
+                int it = 0;
+                for (Thread dado : Tdados) {
+                    Dados d = new Dados();
+                    d.valor();
+                    dado = new Thread(d);
+                    dado.start();
+                    valoresDados[it] = d.getValor();
+                    System.out.println(valoresDados[it]);
+                    it++;
+                    SwingUtilities.updateComponentTreeUI(centro);
+                }
+                SwingUtilities.updateComponentTreeUI(centro);
+                campo.getTurno().comprobarDados(valoresDados);
+            }
+        });
 
     }
 
+    private void mostrarJugadores(){
+        infoJugador.removeAll();
+        ListaJugadores l = campo.getJugadores();
+        Jugador j = l.getInicio();
+        for(int x = 0; x < l.getTamanio(); x++){
+            infoJugador.add(new Label("Nombre: " + j.getNombre()));
+            infoJugador.add(new Label("Dinero: Q" + j.getDinero()));
+            infoJugador.add(new Label("____________________________"));
+            j = j.getSiguiente();
+        }
+    }
     private void cambiarOrden(JPanel component){
         Component lista[] = component.getComponents();
         component.removeAll();
