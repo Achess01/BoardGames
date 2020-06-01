@@ -145,6 +145,7 @@ public class EspacioJuego extends JPanel implements Serializable, Utils, Runnabl
                 infoTurno.add(new Label("\tEstado: " + (propiedad.isHipoteca() ? "Hipotecado" : "Sin hipotecar"), Label.CENTER));
             }
         }
+        SwingUtilities.updateComponentTreeUI(infoTurno);
 
     }
     private void mostrarJugadores(){
@@ -173,6 +174,8 @@ public class EspacioJuego extends JPanel implements Serializable, Utils, Runnabl
         esperarXsegundos(1300);
         Jugador t = campo.getTurno().comprobarDados(valoresDados);
         if(t.getPerderTurno() != 0) {
+            JOptionPane.showMessageDialog(null, t.getNombre() + ", le quedan " + t.getPerderTurno()
+            + " turnos de espera");
             t = t.getSiguiente();
         }
         campo.setTurno(t);

@@ -3,6 +3,7 @@ package com.achess.casillas;
 import com.achess.juego.Jugador;
 import com.achess.listas.ListaTarjetas;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class TomarTarjeta extends Casilla {
@@ -17,6 +18,7 @@ public class TomarTarjeta extends Casilla {
 
     @Override
     public void accion(Jugador jugador) {
-
+        lista.getInicio().accion(jugador);
+        lista.correrLugares();
     }
 }

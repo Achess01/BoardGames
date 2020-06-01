@@ -40,9 +40,6 @@ public class Lugar extends Propiedad {
                 if(jugador.equals(getDuenio())){
                     opcionesDuenio(jugador);
                 }
-                else if(getDuenio().equals(null) && jugador.getActual().equals(this)){
-                    opcionesNoDuenio(jugador);
-                }
             }
 
             @Override
@@ -69,11 +66,44 @@ public class Lugar extends Propiedad {
     }
 
     private void construirCasa(){
+        int g = getGrupo();
+        int cG = getDuenio().getCampo().getGrupos().getCantidad(g);
+        int cantidad = getDuenio().getLugares(g);
 
+        if(casas == cantidadCasas){
+            JOptionPane.showMessageDialog(null, "Cantidad de casas completadas");
+        }
+        else if(cG != cantidad){
+            JOptionPane.showMessageDialog(null,"Aún no tiene todas las propiedades del grupo");
+        }
+        else {
+            if(getDuenio().getDinero() >= precioCasa) {
+                casas++;
+                setCostoUso(getCostoUso() + (int) (getCostoUso() * 0.25));
+                getDuenio().setDinero(getDuenio().getDinero() - precioCasa);
+                JOptionPane.showMessageDialog(null, "Hecho");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "No tiene suficiente dinero");
+            }
+        }
     }
 
     private void construirHotel(){
-
+        if(hoteles == cantidadHoteles || casas != cantidadCasas){
+            JOptionPane.showMessageDialog(null, "No puede construir hoteles");
+        }
+        else {
+            if(getDuenio().getDinero() >= precioHotel) {
+                hoteles++;
+                setCostoUso(getCostoUso() + (int) (getCostoUso() * 0.35));
+                getDuenio().setDinero(getDuenio().getDinero() - precioHotel);
+                JOptionPane.showMessageDialog(null, "Hecho");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "No tiene suficiente dinero");
+            }
+        }
     }
 
     public int getCasas() {

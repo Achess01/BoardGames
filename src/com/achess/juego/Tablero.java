@@ -5,6 +5,7 @@ import com.achess.casillas.*;
 import com.achess.listas.ListaCasillas;
 import com.achess.listas.ListaJugadores;
 import com.achess.listas.ListaTarjetas;
+import com.achess.tarjetas.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,6 @@ public class Tablero implements Serializable, Utils {
     private Grupo grupos;
     private ListaCasillas casillas;
     private ListaJugadores jugadores;
-    private Grupo grupo;
     private Jugador turno;
 
     public Tablero(String nombre, int cantidadJugadores, int cantidadDinero, int cantidadCasillas,
@@ -186,6 +186,19 @@ public class Tablero implements Serializable, Utils {
 
     private ListaTarjetas nuevasTarjetas(){
         ListaTarjetas lista = new ListaTarjetas();
+        int n;
+        for (int i = 0; i < 20; i++) {
+            n = numerosAleatorios(0,6);
+            switch (n){
+                case 0: lista.agregar(new TCaminar()); break;
+                case 1: lista.agregar(new TMulta()); break;
+                case 2: lista.agregar(new TPagar()); break;
+                case 3: lista.agregar(new TPerderTurno()); break;
+                case 4: lista.agregar(new TPremio()); break;
+                case 5: lista.agregar(new TSalgaCarcel()); break;
+                case 6: lista.agregar(new TVayaCarcel()); break;
+            }
+        }
         return  lista;
     }
 

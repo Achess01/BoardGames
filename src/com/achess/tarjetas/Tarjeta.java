@@ -1,6 +1,7 @@
 package com.achess.tarjetas;
 
 import com.achess.Utils;
+import com.achess.juego.Jugador;
 
 import java.io.Serializable;
 
@@ -18,7 +19,7 @@ public abstract class Tarjeta implements Serializable, Utils {
         this.siguiente = null;
     }
 
-    public abstract void accion();
+    public abstract void accion(Jugador jugador);
 
     public Tarjeta getAnterior() {
         return anterior;

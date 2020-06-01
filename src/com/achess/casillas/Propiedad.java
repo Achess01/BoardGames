@@ -125,6 +125,14 @@ public abstract class Propiedad extends Casilla {
         this.hipoteca = hipoteca;
     }
 
+    public int getCostoUso() {
+        return costoUso;
+    }
+
+    public void setCostoUso(int costoUso) {
+        this.costoUso = costoUso;
+    }
+
     @Override
     public void AgregarInfo() {
         super.AgregarInfo();

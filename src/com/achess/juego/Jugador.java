@@ -1,6 +1,7 @@
 package com.achess.juego;
 
 import com.achess.casillas.Casilla;
+import com.achess.casillas.Lugar;
 import com.achess.casillas.Propiedad;
 import com.achess.gui.EspacioJuego;
 
@@ -41,6 +42,30 @@ public class Jugador extends JPanel implements Serializable {
         add(new Label(nombre), JLabel.CENTER);
     }
 
+    public int getLugares(int indexGrupo){
+        int cL = 0;
+        int cantidad = 0;
+        for (Propiedad propiedad : propiedades) {
+            if(propiedad instanceof Lugar){
+                cL++;
+            }
+        }
+        Lugar l[] = new Lugar[cL];
+        cL = 0;
+        for (Propiedad propiedad : propiedades) {
+            if(propiedad instanceof Lugar){
+               l[cL] = (Lugar) propiedad;
+               cL++;
+            }
+        }
+
+        for (Lugar lugar : l) {
+            if(lugar.getGrupo() == indexGrupo){
+                cantidad++;
+            }
+        }
+        return cantidad;
+    }
     public void agregarPropiedad(Propiedad propiedad){
         propiedades = agregar(propiedades, propiedad);
     }
@@ -63,6 +88,7 @@ public class Jugador extends JPanel implements Serializable {
             }
 
             calcularMovimiento(suma);
+            SwingUtilities.updateComponentTreeUI(EspacioJuego.centro);
             if (valoresDados.length > 1) {
                 for (int i = 0; i < valoresDados.length - 1; i++) {
                     if (valoresDados[i] == valoresDados[i + 1]) {
@@ -80,6 +106,14 @@ public class Jugador extends JPanel implements Serializable {
 
     }
 
+    public Tablero getCampo() {
+        return campo;
+    }
+
+    public void setCampo(Tablero campo) {
+        this.campo = campo;
+    }
+
     public Color getFondo() {
         return fondo;
     }
@@ -90,8 +124,16 @@ public class Jugador extends JPanel implements Serializable {
 
     private void calcularMovimiento(int suma){
         Casilla aux = actual;
-        for (int i = 0; i < suma; i++) {
-            aux = aux.getSiguiente();
+        for (int i = 0; i < Math.abs(suma); i++) {
+            if(suma > 0) {
+                aux = aux.getSiguiente();
+                if(aux.equals(campo.getCasillas().getInicio())){
+                    setDinero(getDinero() + campo.getCantidadDineroPorVuelta());
+                }
+            }
+            else {
+                aux = aux.getAnterior();
+            }
         }
         mover(aux);
     }
