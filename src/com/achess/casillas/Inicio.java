@@ -1,5 +1,7 @@
 package com.achess.casillas;
 
+import com.achess.juego.Jugador;
+
 import java.awt.*;
 import java.io.Serializable;
 
@@ -11,7 +13,7 @@ public class Inicio extends Casilla{
     }
 
     @Override
-    public void accion() {
+    public void accion(Jugador jugador) {
 
     }
 }

@@ -1,5 +1,7 @@
 package com.achess.casillas;
 
+import com.achess.juego.Jugador;
+
 import java.awt.*;
 
 public class Neutro extends Casilla{
@@ -9,7 +11,7 @@ public class Neutro extends Casilla{
     }
 
     @Override
-    public void accion() {
+    public void accion(Jugador jugador) {
 
     }
 }

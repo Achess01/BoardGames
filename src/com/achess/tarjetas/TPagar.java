@@ -8,7 +8,7 @@ public class TPagar extends Tarjeta{
     public void accion() {
         pago = numerosAleatorios(25, 40);
         String mensaje = "Usted decide invitar a sus contrincantes a comer. " +
-                "De Q" + pago +" a cada uno";
+                "Dé Q" + pago +" a cada uno";
         JOptionPane.showMessageDialog(null, mensaje);
     }
 }

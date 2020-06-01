@@ -1,5 +1,7 @@
 package com.achess.casillas;
 
+import com.achess.juego.Jugador;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -10,8 +12,8 @@ public class Carcel extends Casilla{
     }
 
     @Override
-    public void accion() {
-
+    public void accion(Jugador jugador) {
+        jugador.setPerderTurno(jugador.getPerderTurno() + 1);
     }
 
 }

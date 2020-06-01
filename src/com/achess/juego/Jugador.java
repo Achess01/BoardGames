@@ -22,10 +22,14 @@ public class Jugador extends JPanel implements Serializable {
     private Jugador anterior;
     private Casilla actual;
     private Color fondo;
+    private int perderTurno;
+    private Tablero campo;
 
-    public Jugador(int index, int dinero){
+    public Jugador(int index, int dinero, Tablero campo){
         this.dinero = dinero;
+        this.campo = campo;
         salirCarcel = 0;
+        perderTurno = 0;
         actual = null;
         siguiente = null;
         anterior = null;
@@ -37,6 +41,9 @@ public class Jugador extends JPanel implements Serializable {
         add(new Label(nombre), JLabel.CENTER);
     }
 
+    public void agregarPropiedad(Propiedad propiedad){
+        propiedades = agregar(propiedades, propiedad);
+    }
     public void mover(Casilla casilla){
         if(actual != null){
             actual.getEspacioJugadores().remove(this);
@@ -47,19 +54,56 @@ public class Jugador extends JPanel implements Serializable {
         SwingUtilities.updateComponentTreeUI(actual);
     }
 
-    public void comprobarDados(int valoresDados[]){
-        int suma = 0;
-        for (int valor : valoresDados) {
-            suma += valor;
-            System.out.println(valor);
-        }
+    public Jugador comprobarDados(int valoresDados[]){
+            int iguales = 0;
+            int suma = 0;
+
+            for (int valorDado : valoresDados) {
+                suma += valorDado;
+            }
+
+            calcularMovimiento(suma);
+            if (valoresDados.length > 1) {
+                for (int i = 0; i < valoresDados.length - 1; i++) {
+                    if (valoresDados[i] == valoresDados[i + 1]) {
+                        iguales++;
+                    }
+                }
+                if (iguales == valoresDados.length - 1) {
+                    JOptionPane.showMessageDialog(null, "¡Los números de los dados son iguales!\n " +
+                            "Tiene otro turno");
+                    return this;
+                }
+            }
+            actual.accion(this);
+            return getSiguiente();
+
+    }
+
+    public Color getFondo() {
+        return fondo;
+    }
+
+    public void setFondo(Color fondo) {
+        this.fondo = fondo;
+    }
+
+    private void calcularMovimiento(int suma){
         Casilla aux = actual;
         for (int i = 0; i < suma; i++) {
             aux = aux.getSiguiente();
         }
-        System.out.println(suma);
         mover(aux);
     }
+
+    public int getPerderTurno() {
+        return perderTurno;
+    }
+
+    public void setPerderTurno(int perderTurno) {
+        this.perderTurno = perderTurno;
+    }
+
     public Casilla getActual() {
         return actual;
     }
@@ -98,6 +142,11 @@ public class Jugador extends JPanel implements Serializable {
 
     public void setDinero(int dinero) {
         this.dinero = dinero;
+        if(dinero <= 0){
+            actual.remove(this);
+            SwingUtilities.updateComponentTreeUI(actual);
+            campo.getJugadores().eliminar(this);
+        }
     }
 
     public Jugador getSiguiente() {
@@ -116,4 +165,12 @@ public class Jugador extends JPanel implements Serializable {
         this.anterior = anterior;
     }
 
+    private Propiedad[] agregar(Propiedad arreglo[], Propiedad elemento){
+        Propiedad a[] = new Propiedad[arreglo.length +1];
+        a[arreglo.length] = elemento;
+        for(int x = 0; x < arreglo.length; x++){
+            a[x] = arreglo[x];
+        }
+        return a;
+    }
 }

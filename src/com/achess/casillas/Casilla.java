@@ -2,6 +2,7 @@ package com.achess.casillas;
 
 import com.achess.gui.EspacioJuego;
 import com.achess.juego.Jugador;
+import com.achess.juego.Tablero;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -69,7 +70,7 @@ public abstract class Casilla extends JPanel implements Serializable{
     }
 
 
-    public abstract void accion();
+    public abstract void accion(Jugador jugador);
 
     public void AgregarInfo(){
         inf.removeAll();

@@ -6,13 +6,11 @@ import javax.swing.*;
 
 public class TCaminar extends Tarjeta{
     private int casillas;
-    private boolean avanzar;
     @Override
     public void accion() {
+        int casillas = numerosAleatorios(-3, 3);
         JOptionPane.showMessageDialog(null, "Hoy es su día de suerte " +
                 "camine " + casillas);
-        int validar = numerosAleatorios(0, 1);
-        int casillas = numerosAleatorios(-3, 3);
-        avanzar = (validar == 1) ? true : false;
+
     }
 }

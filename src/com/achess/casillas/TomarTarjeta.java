@@ -1,5 +1,6 @@
 package com.achess.casillas;
 
+import com.achess.juego.Jugador;
 import com.achess.listas.ListaTarjetas;
 
 import java.awt.*;
@@ -15,7 +16,7 @@ public class TomarTarjeta extends Casilla {
 
 
     @Override
-    public void accion() {
+    public void accion(Jugador jugador) {
 
     }
 }

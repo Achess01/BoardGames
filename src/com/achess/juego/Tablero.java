@@ -60,14 +60,14 @@ public class Tablero implements Serializable, Utils {
           n1 = numerosAleatorios(30, 50);
           n2 = numerosAleatorios(130, 150);
           n3 = numerosAleatorios(100, 120);
-          nuevo = agregar(nuevo, new Estacion("Buses", n2, n3, n1));
+          nuevo = agregar(nuevo, new Estacion("Buses", n2, n3, n1, this));
       }
 
       for(int index = 0; index < servicio; index++){
           n1 = numerosAleatorios(20, 30);
           n2 = numerosAleatorios(110, 130);
           n3 = numerosAleatorios(80, 100);
-          nuevo = agregar(nuevo, new Servicio("Servicios", n2, n3, n1));
+          nuevo = agregar(nuevo, new Servicio("Servicios", n2, n3, n1, this));
       }
       for (int index = 0; index < carcel; index++){
           nuevo = agregar(nuevo, new Carcel("Cárcel"));
@@ -84,7 +84,7 @@ public class Tablero implements Serializable, Utils {
           c = numerosAleatorios(50, 70);
           h = numerosAleatorios(80, 100);
           nuevo = agregar(nuevo, new Lugar(Character.toString(Lugar.nombres), n2, n3,cantidadHoteles, cantidadCasas,
-                  n1,c, h, grupo));
+                  n1,c, h, grupo, this));
           grupos.setCantidad(1,grupo);
           grupo++;
           if(grupo == 5){
@@ -94,7 +94,7 @@ public class Tablero implements Serializable, Utils {
       casillas = escogerOrden(nuevo);
       jugadores = new ListaJugadores();
       for(int x = 0; x < cantidadJugadores; x++){
-          jugadores.agregar(new Jugador(x, cantidadDinero));
+          jugadores.agregar(new Jugador(x, cantidadDinero, this));
       }
       setTurnoInicial();
       Jugador au;

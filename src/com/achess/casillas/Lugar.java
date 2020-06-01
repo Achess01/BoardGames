@@ -1,6 +1,12 @@
 package com.achess.casillas;
 
+import com.achess.juego.Jugador;
+import com.achess.juego.Tablero;
+
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Lugar extends Propiedad {
     public static final Color COLORES_LUGARES[] = {Color.BLUE, Color.RED, Color.YELLOW,
@@ -16,8 +22,8 @@ public class Lugar extends Propiedad {
 
     public Lugar(String nombre, int precioCompra, int precioHipoteca,
                  int cantidadHoteles, int cantidadCasas, int costoEstancia, int precioCasa, int precioHotel,
-                 int grupo) {
-        super(nombre, precioCompra, precioHipoteca, costoEstancia);
+                 int grupo, Tablero campo) {
+        super(nombre, precioCompra, precioHipoteca, costoEstancia, campo);
         this.cantidadHoteles = cantidadHoteles;
         this.cantidadCasas = cantidadCasas;
         this.precioCasa = precioCasa;
@@ -27,20 +33,52 @@ public class Lugar extends Propiedad {
         hoteles = 0;
         setFondo(COLORES_LUGARES[this.grupo]);
         nombres++;
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                Jugador jugador = campo.getTurno();
+                if(jugador.equals(getDuenio())){
+                    opcionesDuenio(jugador);
+                }
+                else if(getDuenio().equals(null) && jugador.getActual().equals(this)){
+                    opcionesNoDuenio(jugador);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        });
 
     }
 
-    @Override
-    public void AgregarInfo() {
-        super.AgregarInfo();
-        setInfo("Casas", casas + "/" + cantidadCasas);
-        setInfo("Hoteles", hoteles + "/" + cantidadHoteles);
+    private void construirCasa(){
+
+    }
+
+    private void construirHotel(){
+
     }
 
     public int getCasas() {
         return casas;
     }
-
     public void setCasas(int casas) {
         this.casas = casas;
     }
@@ -94,7 +132,25 @@ public class Lugar extends Propiedad {
     }
 
     @Override
-    public void accion() {
+    public void AgregarInfo() {
+        super.AgregarInfo();
+        setInfo("Casas", casas + "/" + cantidadCasas);
+        setInfo("Hoteles", hoteles + "/" + cantidadHoteles);
+    }
 
+    @Override
+    protected void opcionesDuenio(Jugador jugador) {
+        String mensaje = "Bienvenido " + jugador.getNombre();
+        //POner opciones
+        String[] options = new String[] {"Construir casa", "Construir hotel",  "Hipotecar", "Pagar hipoteca", "Pasar"};
+        int response = JOptionPane.showOptionDialog(null, mensaje, getNombre(),
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                null, options, options[0]);
+        switch (response){
+            case 0: construirCasa(); break;
+            case 1: construirHotel(); break;
+            case 2: hipotecar(); break;
+            case 3: pagarHipoteca(); break;
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.achess.gui;
 
 import com.achess.Utils;
 import com.achess.casillas.Casilla;
+import com.achess.casillas.Propiedad;
 import com.achess.juego.Dados;
 import com.achess.juego.Jugador;
 import com.achess.juego.Tablero;
@@ -27,6 +28,8 @@ public class EspacioJuego extends JPanel implements Serializable, Utils, Runnabl
     public static JPanel centro = new JPanel();
     private Tablero campo;
     private JPanel infoJugador;
+    private JPanel infoTurno;
+    private int valoresDados[];
 
     public EspacioJuego(Tablero campo){
         this.campo = campo;
@@ -86,6 +89,10 @@ public class EspacioJuego extends JPanel implements Serializable, Utils, Runnabl
             }
 
         }
+        infoTurno = new JPanel();
+        infoTurno.setLayout(new BoxLayout(infoTurno, BoxLayout.Y_AXIS));
+        centro.add(infoTurno);
+        jugadorTurno();
         tablero = new JPanel();
         cambiarOrden(sur);
         cambiarOrden(oeste);
@@ -103,7 +110,7 @@ public class EspacioJuego extends JPanel implements Serializable, Utils, Runnabl
                 moverDados.setEnabled(false);
                 dados.removeAll();
                 Thread Tdados[] = new Thread[campo.getCantidadDados()];
-                int valoresDados[] = new int[Tdados.length];
+                valoresDados = new int[Tdados.length];
                 int it = 0;
                 for (Thread dado : Tdados) {
                     Dados d = new Dados();
@@ -119,12 +126,27 @@ public class EspacioJuego extends JPanel implements Serializable, Utils, Runnabl
                 SwingUtilities.updateComponentTreeUI(centro);
                 Thread m = new Thread(EspacioJuego.this::run);
                 m.start();
-                campo.getTurno().comprobarDados(valoresDados);
             }
         });
 
     }
 
+    private void jugadorTurno(){
+        Jugador j = campo.getTurno();
+        Propiedad p[] = j.getPropiedades();
+        infoTurno.removeAll();
+        infoTurno.setBackground(j.getFondo());
+        infoTurno.add(new Label("TURNO", Label.CENTER));
+        infoTurno.add(new Label("Jugador: " + j.getNombre(), Label.CENTER));
+        infoTurno.add(new Label("Propiedades", Label.CENTER));
+        if(p.length > 0){
+            for (Propiedad propiedad : p) {
+                infoTurno.add(new Label("Nombre "+ propiedad.getNombre(), Label.CENTER));
+                infoTurno.add(new Label("\tEstado: " + (propiedad.isHipoteca() ? "Hipotecado" : "Sin hipotecar"), Label.CENTER));
+            }
+        }
+
+    }
     private void mostrarJugadores(){
         infoJugador.removeAll();
         ListaJugadores l = campo.getJugadores();
@@ -136,6 +158,7 @@ public class EspacioJuego extends JPanel implements Serializable, Utils, Runnabl
             infoJugador.add(new Label("____________________________"));
             j = j.getSiguiente();
         }
+        SwingUtilities.updateComponentTreeUI(centro);
     }
     private void cambiarOrden(JPanel component){
         Component lista[] = component.getComponents();
@@ -147,7 +170,17 @@ public class EspacioJuego extends JPanel implements Serializable, Utils, Runnabl
 
     @Override
     public void run() {
-        mostrarJugadores();
+        esperarXsegundos(1300);
+        Jugador t = campo.getTurno().comprobarDados(valoresDados);
+        if(t.getPerderTurno() != 0) {
+            t = t.getSiguiente();
+        }
+        campo.setTurno(t);
         moverDados.setEnabled(true);
+        mostrarJugadores();
+        jugadorTurno();
+        if(campo.getJugadores().getTamanio() == 1){
+            JOptionPane.showMessageDialog(null, "El ganador es " + t.getNombre());
+        }
     }
 }
