@@ -68,14 +68,6 @@ public class MainFrame  extends JFrame implements Utils {
                 public void actionPerformed(ActionEvent actionEvent) {
                     EspacioJuego espacioJuego = abrirFichero("BOARD (Tablero inicial)", "board");
                     if(espacioJuego != null){
-                        ListaCasillas l = espacioJuego.getCampo().getCasillas();
-                        Casilla c = l.getInicio();
-                        for (int i = 0; i < l.getTamanio(); i++) {
-                            c.agregarEventos();
-                            c = c.getSiguiente();
-                        }
-
-
                         setContentPane(espacioJuego);
                         setJugando(true);
                         pack();
@@ -89,6 +81,13 @@ public class MainFrame  extends JFrame implements Utils {
                 public void actionPerformed(ActionEvent actionEvent) {
                     EspacioJuego espacioJuego = abrirFichero("GAME (Juego en proceso)", "game");
                     if(espacioJuego != null){
+                        ListaCasillas l = espacioJuego.getCampo().getCasillas();
+                        Casilla c = l.getInicio();
+                        for (int i = 0; i < l.getTamanio(); i++) {
+                            c.agregarEventos();
+                            c = c.getSiguiente();
+                        }
+
                         setContentPane(espacioJuego);
                         pack();
                         setJugando(true);
