@@ -2,7 +2,9 @@ package com.achess.listas;
 
 import com.achess.juego.Jugador;
 
-public class ListaJugadores {
+import java.io.Serializable;
+
+public class ListaJugadores implements Serializable {
 
     private Jugador inicio;
     private int tamanio;

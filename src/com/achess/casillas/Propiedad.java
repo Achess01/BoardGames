@@ -1,12 +1,10 @@
 package com.achess.casillas;
 
+import com.achess.gui.EspacioJuego;
 import com.achess.juego.Jugador;
 import com.achess.juego.Tablero;
 
 import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -63,12 +61,46 @@ public abstract class Propiedad extends Casilla {
 
     }
 
+    @Override
+    public void agregarEventos() {
+        super.agregarEventos();
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                Jugador jugador = getCampo().getTurno();
+                if(jugador.equals(getDuenio())){
+                    opcionesDuenio(jugador);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        });
+    }
 
     protected void hipotecar(){
         if(!hipoteca){
             duenio.setDinero(duenio.getDinero() + precioHipoteca);
             hipoteca = true;
             JOptionPane.showMessageDialog(null, "Hipoteca hecha con éxito");
+            SwingUtilities.updateComponentTreeUI(EspacioJuego.centro);
         }
         else {
             JOptionPane.showMessageDialog(null, "Esta propiedad ya está hipotecada");
@@ -78,7 +110,7 @@ public abstract class Propiedad extends Casilla {
     protected void pagarHipoteca(){
         if(hipoteca){
             int d = duenio.getDinero();
-            int h = precioHipoteca + (int)0.1*precioHipoteca;
+            int h = precioHipoteca + (int)campo.getInteres()*precioHipoteca;
             if(d  < h){
                 JOptionPane.showMessageDialog(null, "No tiene dinero para pagar la hipoteca. \n " +
                         "Le hacen falta Q" + (h-d));
@@ -89,9 +121,18 @@ public abstract class Propiedad extends Casilla {
                 JOptionPane.showMessageDialog(null, "Hipoteca pagada");
             }
         }
+        else {
+            JOptionPane.showMessageDialog(null,"Esta propiedad no está hipotecada");
+        }
     }
 
+    public Tablero getCampo() {
+        return campo;
+    }
 
+    public void setCampo(Tablero campo) {
+        this.campo = campo;
+    }
 
     public Jugador getDuenio() {
         return duenio;
@@ -166,9 +207,6 @@ public abstract class Propiedad extends Casilla {
                 }
 
             }
-        }
-        else {
-            opcionesDuenio(jugador);
         }
     }
 }

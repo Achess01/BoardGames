@@ -33,35 +33,7 @@ public class Lugar extends Propiedad {
         hoteles = 0;
         setFondo(COLORES_LUGARES[this.grupo]);
         nombres++;
-        addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
-                Jugador jugador = campo.getTurno();
-                if(jugador.equals(getDuenio())){
-                    opcionesDuenio(jugador);
-                }
-            }
 
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-
-            }
-        });
 
     }
 

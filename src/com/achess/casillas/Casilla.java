@@ -38,6 +38,12 @@ public abstract class Casilla extends JPanel implements Serializable{
         add(espacioJugadores);
         setBorder(new LineBorder(this.fondo));
         setPreferredSize(new Dimension(100, 75));
+
+    }
+
+    public abstract void accion(Jugador jugador);
+
+    public void agregarEventos(){
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -68,10 +74,6 @@ public abstract class Casilla extends JPanel implements Serializable{
             }
         });
     }
-
-
-    public abstract void accion(Jugador jugador);
-
     public void AgregarInfo(){
         inf.removeAll();
         setInfo("Nombre", nombre);

@@ -26,7 +26,7 @@ public class EspacioJuego extends JPanel implements Serializable, Utils, Runnabl
     private JPanel norte;
     private JPanel este;
     public static JPanel centro = new JPanel();
-    private Tablero campo;
+    private static Tablero campo;
     private JPanel infoJugador;
     private JPanel infoTurno;
     private int valoresDados[];
@@ -161,6 +161,15 @@ public class EspacioJuego extends JPanel implements Serializable, Utils, Runnabl
         }
         SwingUtilities.updateComponentTreeUI(centro);
     }
+
+    public static Tablero getCampo() {
+        return campo;
+    }
+
+    public static void setCampo(Tablero campo) {
+        EspacioJuego.campo = campo;
+    }
+
     private void cambiarOrden(JPanel component){
         Component lista[] = component.getComponents();
         component.removeAll();
@@ -174,6 +183,7 @@ public class EspacioJuego extends JPanel implements Serializable, Utils, Runnabl
         esperarXsegundos(1300);
         Jugador t = campo.getTurno().comprobarDados(valoresDados);
         if(t.getPerderTurno() != 0) {
+            t.setPerderTurno(t.getPerderTurno() - 1);
             JOptionPane.showMessageDialog(null, t.getNombre() + ", le quedan " + t.getPerderTurno()
             + " turnos de espera");
             t = t.getSiguiente();
